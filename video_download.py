@@ -8,7 +8,7 @@ from pytube import YouTube
 from tqdm import tqdm
 
 import ImportantVariables as Imp_val
-import get_youtube_vedio_urls_using_api
+import get_video_links_from_channel
 import yt_dlp_file
 
 
@@ -62,9 +62,9 @@ def download_video(video_url, save_path, metadata_list, index):
 
 def get_channel_id(video_links, link_of_youtube_videos_json_file):
     if len(video_links) < 1:
-        get_youtube_vedio_urls_using_api.main()
-        with open(link_of_youtube_videos_json_file, "r") as file:
-            video_links = json.load(file)
+        video_links= get_video_links_from_channel.main()
+        # with open(link_of_youtube_videos_json_file, "r") as file:
+        #     video_links = json.load(file)
 
     return video_links
 

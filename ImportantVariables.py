@@ -12,12 +12,12 @@ imp_json_files_folder = current_Folder_Path + "/imp_json_files/"
 youtube_upload_folder = current_Folder_Path + "/youtube_upload_folder"
 output_videos_folder = current_Folder_Path + "/output_videos"
 drive_file_structure_folder = current_Folder_Path +"/folder_tree"
+cookies_file_path = current_Folder_Path + "/main_cookies.txt"
 
 # imp files path
 metadata_file_json_file = imp_json_files_folder + "video_metadata.json"
 link_of_youtube_videos_json_file = imp_json_files_folder + "link_of_youtube_videos.json"
 channels_list_json_file = imp_json_files_folder + "channels_list.json"
-cookies_file_path = imp_json_files_folder + "main_cookies.txt"
 drive_file_structure_file=drive_file_structure_folder+"/folder_tree.json"
 
 # github
@@ -26,6 +26,7 @@ GITHUB_OWNER = "niharika17032001"
 GITHUB_google_log_in_REPO = "google_log_in"
 GITHUB_WORKFLOW_FILE = "main.yml"
 GITHUB_BRANCH = "main"
+TOKENS_LOCAL_FILE_PATH = current_Folder_Path+"/tokens.json"
 
 # drive imp folders id
 youtube_videos_for_upload_folder_id = "1V3gjZpfNJbFMPO0R1OAnrRjoqD0pozr4"

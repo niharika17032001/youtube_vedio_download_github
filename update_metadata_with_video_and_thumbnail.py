@@ -12,7 +12,7 @@ def update_metadata_with_video_and_thumbnail(json_file = 'uploaded_files.json',m
     with open(metadata_file, 'r',encoding='utf-8') as file:
         metadata_dict = json.load(file)  # Same here for metadata
 
-    print(metadata_dict)
+    # print(metadata_dict)
     metadata=metadata_dict["video"]
 
     # Function to determine file type based on the extension
@@ -32,9 +32,9 @@ def update_metadata_with_video_and_thumbnail(json_file = 'uploaded_files.json',m
         thumbnail_id = None
 
         for filename, file_id in files.items():
-            if filename.endswith(".mp4") or filename.endswith(".webm"):
+            if filename.endswith(".mp4") or filename.endswith(".webm") or filename.endswith(".mkv"):
                 video_id = file_id
-            elif filename.endswith(".webp"):
+            elif filename.endswith(".webp") or filename.endswith(".jpg"):
                 thumbnail_id = file_id
 
         # Match metadata by index and add video and thumbnail IDs
@@ -53,7 +53,7 @@ def main(json_file = 'uploaded_files.json',metadata_file = ImportantVariables.me
 
     # Call the function to update metadata
     updated_metadata = update_metadata_with_video_and_thumbnail(json_file, metadata_file)
-    print(updated_metadata)
+    print("updated_metadata : ",updated_metadata)
 
 if __name__ == "__main__":
     main()

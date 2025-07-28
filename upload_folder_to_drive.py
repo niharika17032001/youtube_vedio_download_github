@@ -8,7 +8,6 @@ from googleapiclient.http import MediaFileUpload
 
 import ImportantVariables as imp_val
 import crediantials
-import list_all_folders_in_drive
 import update_metadata_with_video_and_thumbnail
 
 # Replace with your actual credentials
@@ -307,10 +306,6 @@ def prepare_metadata_for_upload():
     update_metadata_with_video_and_thumbnail.main()
 
 
-def prepare_folder_tree(parent_drive_folder_id, destination_drive_file_structure_folder):
-    list_all_folders_in_drive.save_folder_tree_to_json(parent_drive_folder_id)
-    folders = [imp_val.drive_file_structure_folder]
-    copy_folders_to_folder(folders, destination_drive_file_structure_folder)
 
 
 def main():

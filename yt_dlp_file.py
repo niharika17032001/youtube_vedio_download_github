@@ -62,7 +62,7 @@ def download_video(video_url, save_path, metadata_list, index):
 
     cookies_file = create_temp_cookies_file(cookies_file_path)
 
-    # Step 1: Probe metadata first
+    # Step 1: Probe metadata
     probe_opts = {
         'quiet': True,
         'cookiefile': cookies_file,
@@ -73,20 +73,23 @@ def download_video(video_url, save_path, metadata_list, index):
 
     subtitles = info.get("subtitles", {})
     auto_captions = info.get("automatic_captions", {})
+    thumbnail_url = info.get("thumbnail")
 
     preferred_langs = []
     for lang in ['hi', 'en']:
         if lang in subtitles or lang in auto_captions:
             preferred_langs.append(lang)
 
-    print("🔤 Available subtitles:", list(subtitles.keys()))
-    print("🧠 Available auto-captions:", list(auto_captions.keys()))
+    print("🔤 Subtitles:", list(subtitles.keys()))
+    print("🧠 Auto-captions:", list(auto_captions.keys()))
 
-    # Step 2: Attempt download with subtitles
+    # Step 2: Download video, auto captions, and thumbnail
     ydl_opts = {
         'outtmpl': os.path.join(save_path, f'vedio_{index}.%(ext)s'),
         'writesubtitles': False,
         'writeautomaticsub': True,
+        'writeinfojson': True,
+        'writethumbnail': True,
         'subtitleslangs': preferred_langs,
         'subtitlesformat': 'vtt',
         'quiet': True,
@@ -102,14 +105,26 @@ def download_video(video_url, save_path, metadata_list, index):
         print(f"❌ yt-dlp download failed: {e}")
         return
 
-    # Step 3: Manually save captions if yt-dlp failed
+    # Step 3: Manually save captions if not auto-saved
     caption_saved = False
     for lang in preferred_langs:
         found = any(f"vedio_{index}.{lang}.vtt" in f for f in os.listdir(save_path))
         if not found:
             caption_saved = save_caption_manually(auto_captions, lang, save_path, index)
 
-    # Step 4: Save metadata
+    # Step 4: Save thumbnail (if not already downloaded)
+    if thumbnail_url:
+        try:
+            import requests
+            thumb_path = os.path.join(save_path, f'vedio_{index}.webp')
+            r = requests.get(thumbnail_url, timeout=10)
+            with open(thumb_path, 'wb') as f:
+                f.write(r.content)
+            print(f"🖼️ Thumbnail saved to: {thumb_path}")
+        except Exception as e:
+            print(f"⚠️ Failed to save thumbnail manually: {e}")
+
+    # Step 5: Save metadata
     cleaned_title = clean_filename(info.get("title", f"video_{index}"))
     cleaned_description = remove_urls(info.get("description", ""))
 
@@ -125,12 +140,11 @@ def download_video(video_url, save_path, metadata_list, index):
 
     ext = info.get("ext", "mp4")
     print(f"✅ Downloaded: {cleaned_title}")
-    print(f"📁 Video saved to: vedio_{index}.{ext}")
+    print(f"📁 Saved: vedio_{index}.{ext}")
     if caption_saved:
-        print(f"📑 Captions saved manually.")
+        print("📑 Captions saved manually.")
     else:
-        print(f"⚠️ Captions not found or saved.")
-
+        print("⚠️ Captions not found or saved.")
 
 def temp_main(video_url):
     metadata = []

@@ -41,11 +41,16 @@ def main(index):
 
     #
     sleep(1)
-    all_files = os.listdir(video_directory)
+    all_files=[]
+    for folder_name in os.listdir(video_directory):
+        folder_path = os.path.join(video_directory, folder_name)
+        if os.path.isdir(folder_path):  # Only include directories
+            files = os.listdir(folder_path)
+            all_files.extend(files)
     print("All files in the directory:", all_files)
     # Get all video files
     print(video_directory)
-    video_files = [f for f in os.listdir(video_directory) if f.endswith(('.mp4', '.avi', '.mov', '.webm'))]
+    video_files = [f for f in all_files if f.endswith(('.mp4', '.avi', '.mov', '.webm'))]
     validate_vedio_files(video_files)
     upload_folder_to_drive.main()
 
