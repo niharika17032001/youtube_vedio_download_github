@@ -9,5 +9,5 @@ def main(name,index):
 
 
 if __name__ == "__main__":
-    main("amit12345",10)
+    main("amit12345",3)
     # main(name="Amit",index=1)
