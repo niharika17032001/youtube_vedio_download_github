@@ -95,7 +95,7 @@ def save_metadata_file_json_file(metadata_file_json_file, metadata_list, metadat
 
 
 def download_videos_from_json(link_of_youtube_videos_json_file, downloaded_videos_folder, metadata_file_json_file,
-                              max_videos=5):
+                              max_videos=5,start_index = -1,end_index = -1):
     with open(link_of_youtube_videos_json_file, "r") as file:
         data = json.load(file)
     data = convert_imp_json_to_dic_from_list(data)
@@ -115,12 +115,34 @@ def download_videos_from_json(link_of_youtube_videos_json_file, downloaded_video
 
     if max_videos < 0:
         max_videos = len(video_links)
-    #
-    main_index = 0
+    if start_index < 0:
+        index_set = {video['index'] for video in metadata['video']}
+        max_index  = max(index_set)
+        start_index = max_index +1
+        print("start index:", start_index)
+    if end_index < 0:
+        end_index = start_index +max_videos
+
+
+
+
+
+
+    # Slice video_links between start and end
+    selected_videos = video_links[start_index:end_index]
+
+    # Apply max_videos limit
+    selected_videos = selected_videos[:max_videos]
+    main_index=start_index
+
+    # your download logic here
 
     try:
-        for index, video_url in tqdm(enumerate(video_links[:max_videos]), desc="Downloading Videos",
-                                     total=min(len(video_links), max_videos)):
+        for index, video_url in tqdm(
+                enumerate(selected_videos, start=start_index),
+                desc="Downloading Videos",
+                total=len(selected_videos)
+        ):
             # download_video(video_url, downloaded_videos_folder, metadata_list, index)
             yt_dlp_file.download_video(video_url, downloaded_videos_folder, metadata_list, index)
             main_index = index
@@ -137,9 +159,10 @@ def main(max_videos=5):
     link_of_youtube_videos_json_file = Imp_val.link_of_youtube_videos_json_file
     downloaded_videos_folder = Imp_val.downloaded_videos_folder
     metadata_file_json_file = Imp_val.metadata_file_json_file
+
     download_videos_from_json(link_of_youtube_videos_json_file, downloaded_videos_folder, metadata_file_json_file,
                               max_videos)
 
 
 if __name__ == "__main__":
-    main(1)
+    main(4)
