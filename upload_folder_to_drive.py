@@ -331,7 +331,7 @@ def manga_main():
     parent_drive_folder_id = imp_val.youtube_videos_for_upload_folder_id
     current_folder = imp_val.current_Folder_Path
     youtube_folder_to_local_path_for_upload = current_folder + "/youtube_folder_to_upload"+"/manga_youtube_videos"
-    imp_json_folder_local_path_for_upload = current_folder + "/imp_json_folder_to_upload" +"/imp_json_files"
+    imp_json_folder_local_path_for_upload = current_folder + "/imp_json_folder_to_upload" +"/manga_imp_json_file"
 
     youtube_folder_to_upload_path = current_folder + "/youtube_folder_to_upload"
     imp_json_folder_to_upload_path = current_folder + "/imp_json_folder_to_upload"
@@ -344,10 +344,10 @@ def manga_main():
         imp_val.manga_channels_list_json_file
     ]
 
-    prepare_manga_youtube_folder_to_upload(youtube_folder_to_local_path_for_upload,video_directory)
+    # prepare_manga_youtube_folder_to_upload(youtube_folder_to_local_path_for_upload,video_directory)
 
-    upload_youtube_folder_to_drive(youtube_folder_to_upload_path, parent_drive_folder_id)
-    prepare_metadata_for_upload(metadata_file_json_file)
+    # upload_youtube_folder_to_drive(youtube_folder_to_upload_path, parent_drive_folder_id)
+    # prepare_metadata_for_upload(metadata_file_json_file)
 
     prepare_manga_imp_json_folder_to_upload(imp_json_folder_local_path_for_upload,manga_imp_json_files)
     upload_folder_to_drive(imp_json_folder_to_upload_path, parent_drive_folder_id)
@@ -361,10 +361,10 @@ def main():
     imp_json_folder_to_upload_path = current_folder + "/imp_json_folder_to_upload"
     metadata_file_json_file=imp_val.metadata_file_json_file
 
-    prepare_youtube_folder_to_upload(youtube_folder_to_upload_path)
-
-    upload_youtube_folder_to_drive(youtube_folder_to_upload_path, parent_drive_folder_id)
-    prepare_metadata_for_upload(metadata_file_json_file)
+    # prepare_youtube_folder_to_upload(youtube_folder_to_upload_path)
+    #
+    # upload_youtube_folder_to_drive(youtube_folder_to_upload_path, parent_drive_folder_id)
+    # prepare_metadata_for_upload(metadata_file_json_file)
 
     prepare_imp_json_folder_to_upload(imp_json_folder_to_upload_path)
     upload_folder_to_drive(imp_json_folder_to_upload_path, parent_drive_folder_id)
@@ -380,5 +380,5 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
-    manga_main()
+    main()
+    # manga_main()
