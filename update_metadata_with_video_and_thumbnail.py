@@ -27,7 +27,7 @@ def update_metadata_with_video_and_thumbnail(json_file = 'uploaded_files.json',m
             return "Unknown"
 
     # Add video and thumbnail IDs to the metadata list
-    for index, files in data["youtube_videos"].items():
+    for index, files in next(iter(data.values())).items():
         video_id = None
         thumbnail_id = None
 

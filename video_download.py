@@ -117,22 +117,18 @@ def download_videos_from_json(link_of_youtube_videos_json_file, downloaded_video
         max_videos = len(video_links)
     if start_index < 0:
         index_set = {video['index'] for video in metadata['video']}
-        max_index  = max(index_set)
+        if len(index_set)==0:
+            max_index= -1
+        else:
+            max_index  = max(index_set)
         start_index = max_index +1
         print("start index:", start_index)
     if end_index < 0:
         end_index = start_index +max_videos
 
 
-
-
-
-
-    # Slice video_links between start and end
-    selected_videos = video_links[start_index:end_index]
-
     # Apply max_videos limit
-    selected_videos = selected_videos[:max_videos]
+    selected_videos = video_links[:max_videos]
     main_index=start_index
 
     # your download logic here
@@ -165,4 +161,4 @@ def main(max_videos=5):
 
 
 if __name__ == "__main__":
-    main(4)
+    main(1)

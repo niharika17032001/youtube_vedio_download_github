@@ -13,12 +13,19 @@ youtube_upload_folder = current_Folder_Path + "/youtube_upload_folder"
 output_videos_folder = current_Folder_Path + "/output_videos"
 drive_file_structure_folder = current_Folder_Path +"/folder_tree"
 cookies_file_path = current_Folder_Path + "/main_cookies.txt"
+manga_imp_json_files_folder = current_Folder_Path + "/manga_imp_json_file/"
 
 # imp files path
 metadata_file_json_file = imp_json_files_folder + "video_metadata.json"
 link_of_youtube_videos_json_file = imp_json_files_folder + "link_of_youtube_videos.json"
 channels_list_json_file = imp_json_files_folder + "channels_list.json"
 drive_file_structure_file=drive_file_structure_folder+"/folder_tree.json"
+
+# manga_imp files path
+manga_metadata_file_json_file = manga_imp_json_files_folder + "video_metadata.json"
+manga_link_of_youtube_videos_json_file = manga_imp_json_files_folder + "link_of_youtube_videos.json"
+manga_channels_list_json_file = manga_imp_json_files_folder + "channels_list.json"
+manga_drive_file_structure_file=drive_file_structure_folder+"/folder_tree.json"
 
 # github
 GITHUB_LOCAL_FILE_PATH = current_Folder_Path + "/daily_update.txt"
@@ -32,6 +39,7 @@ TOKENS_LOCAL_FILE_PATH = current_Folder_Path+"/tokens.json"
 youtube_videos_for_upload_folder_id = "1V3gjZpfNJbFMPO0R1OAnrRjoqD0pozr4"
 imp_json_files_folder_id = "1xjvtIZXSwpSaZS4uS0YRzhDEQuR_wgVu"
 youtube_vedio_folder_id = "1vsBjK-7SBeJAwNv5CeBNBT_hiHWu_6pM"
+manga_imp_json_files_folder_id = "1DiBCwHcgQZ2-7C3Bv-k6tcW1i4i_zm0_"
 
 # vedio editing paths
 PATHS = {
